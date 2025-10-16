@@ -29,7 +29,9 @@ namespace trintrin {
                     .def_readwrite("baseOrientationWRTGlobal", &HumanState::baseOrientationWRTGlobal)
                     .def_readwrite("baseVelocityWRTGlobal", &HumanState::baseVelocityWRTGlobal)
                     .def_readwrite("CoMPositionWRTGlobal", &HumanState::CoMPositionWRTGlobal)
-                    .def_readwrite("CoMVelocityWRTGlobal", &HumanState::CoMVelocityWRTGlobal);
+                    .def_readwrite("CoMVelocityWRTGlobal", &HumanState::CoMVelocityWRTGlobal)
+                    .def("__str__", &HumanState::toString)
+                    .def("toString", &HumanState::toString);
 
                 CreateBufferedPort<HumanState>(module, "BufferedPortHumanState");
             }
