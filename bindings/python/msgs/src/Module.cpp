@@ -4,6 +4,7 @@
 #include <pybind11/pybind11.h>
 
 #include <trintrin/bindings/msgs/HumanState.h>
+#include <trintrin/bindings/msgs/WearableData.h>
 
 namespace trintrin {
     namespace bindings {
@@ -14,6 +15,7 @@ namespace trintrin {
                 module.doc() = "trintrin messages module.";
 
                 CreateHumanState(module);
+                CreateWearableData(module);
             }
         } // namespace msgs
     } // namespace bindings

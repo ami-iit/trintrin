@@ -6,6 +6,6 @@ set(H_PREFIX include/trintrin/bindings/msgs)
 
 add_trintrin_python_module(
     NAME MsgsBindings
-    SOURCES src/HumanState.cpp src/Module.cpp
-    HEADERS ${H_PREFIX}/HumanState.h ${H_PREFIX}/BufferedPort.h ${H_PREFIX}/Module.h
+    SOURCES src/HumanState.cpp src/WearableData.cpp src/Module.cpp
+    HEADERS ${H_PREFIX}/HumanState.h ${H_PREFIX}/WearableData.h ${H_PREFIX}/BufferedPort.h ${H_PREFIX}/Module.h
     LINK_LIBRARIES trintrin::msgs YARP::YARP_os)
