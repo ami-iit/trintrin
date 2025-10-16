@@ -32,7 +32,7 @@ option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Flag to enable python bindings
-option(TRIN_COMPILE_PYTHON_BINDINGS "Flag that enables building the bindings" OFF)
+option(TRINTRIN_COMPILE_PYTHON_BINDINGS "Flag that enables building the bindings" OFF)
 
 # Control where binaries and libraries are placed in the build folder.
 # This simplifies tests running in Windows.
@@ -57,6 +57,7 @@ include(AddUninstallTarget)
 include(InstallBasicPackageFiles)
 
 add_subdirectory(msgs)
+add_subdirectory(bindings)
 
 install_basic_package_files(${PROJECT_NAME}
   VERSION ${${PROJECT_NAME}_VERSION}
