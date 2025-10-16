@@ -6,6 +6,7 @@
 #include <trintrin/bindings/msgs/Common.h>
 #include <trintrin/bindings/msgs/HumanDynamics.h>
 #include <trintrin/bindings/msgs/HumanState.h>
+#include <trintrin/bindings/msgs/HumanWrench.h>
 #include <trintrin/bindings/msgs/WearableData.h>
 
 namespace trintrin {
@@ -19,6 +20,7 @@ namespace trintrin {
                 CreateCommon(module);
                 CreateHumanDynamics(module);
                 CreateHumanState(module);
+                CreateHumanWrench(module);
                 CreateWearableData(module);
             }
         } // namespace msgs

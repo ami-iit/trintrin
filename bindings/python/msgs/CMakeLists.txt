@@ -4,8 +4,27 @@
 
 set(H_PREFIX include/trintrin/bindings/msgs)
 
+set(TRINTRIN_BINDINGS_MSGS_SRC
+    src/Common.cpp
+    src/HumanDynamics.cpp
+    src/HumanState.cpp
+    src/HumanWrench.cpp
+    src/WearableData.cpp
+    src/Module.cpp
+)
+
+set(TRINTRIN_BINDINGS_MSGS_HDR
+    ${H_PREFIX}/Common.h
+    ${H_PREFIX}/HumanDynamics.h
+    ${H_PREFIX}/HumanState.h
+    ${H_PREFIX}/HumanWrench.h
+    ${H_PREFIX}/WearableData.h
+    ${H_PREFIX}/BufferedPort.h
+    ${H_PREFIX}/Module.h
+)
+
 add_trintrin_python_module(
     NAME MsgsBindings
-    SOURCES src/Common.cpp src/HumanDynamics.cpp src/HumanState.cpp src/WearableData.cpp src/Module.cpp
-    HEADERS ${H_PREFIX}/Common.h ${H_PREFIX}/HumanDynamics.h ${H_PREFIX}/HumanState.h ${H_PREFIX}/WearableData.h ${H_PREFIX}/BufferedPort.h ${H_PREFIX}/Module.h
+    SOURCES ${TRINTRIN_BINDINGS_MSGS_SRC}
+    HEADERS ${TRINTRIN_BINDINGS_MSGS_HDR}
     LINK_LIBRARIES trintrin::msgs YARP::YARP_os)
