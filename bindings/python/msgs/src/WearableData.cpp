@@ -33,8 +33,6 @@ namespace trintrin {
             void CreateSensorInfo(pybind11::module& module)
             {
                 namespace py = ::pybind11;
-
-
                 py::class_<::trintrin::msgs::SensorInfo>(module, "SensorInfo")
                                         .def(py::init())
                     .def_readwrite("name", &::trintrin::msgs::SensorInfo::name)
