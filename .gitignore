@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio files
+.vs/
+CMakeSettings.json
+
+# Build files
+build*/
+
+# Python cache
+__pycache__/
