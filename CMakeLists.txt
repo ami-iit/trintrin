@@ -29,6 +29,20 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Shared/Dynamic or Static library?
 option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
 
+# Encourage user to specify a build type (e.g. Release, Debug, etc.), otherwise set it to Release.
+if(NOT CMAKE_CONFIGURATION_TYPES)
+    if(NOT CMAKE_BUILD_TYPE)
+        message(STATUS "Setting build type to 'Release' as none was specified.")
+        set_property(CACHE CMAKE_BUILD_TYPE PROPERTY VALUE "Release")
+    endif()
+endif()
+
+# Build test related commands?
+option(BUILD_TESTING "Create tests using CMake" OFF)
+if(BUILD_TESTING)
+    enable_testing()
+endif()
+
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Flag to enable python bindings

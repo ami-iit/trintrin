@@ -41,6 +41,21 @@ function(add_trintrin_python_module)
 
   set_property(GLOBAL APPEND PROPERTY pybind_link_libraries ${link_libraries})
 
+  set(run_python_test ON)
+  foreach(condition ${tests_runtime_conditions})
+    if(NOT ${condition})
+      set(run_python_test OFF)
+      break()
+    endif()
+  endforeach()
+
+  if(${run_python_test})
+    foreach(test ${tests})
+      set_property(GLOBAL APPEND PROPERTY TrinTrinBindings_TESTS
+        ${CMAKE_CURRENT_SOURCE_DIR}/${test})
+    endforeach()
+  endif()
+
   message(STATUS "Added files for bindings named ${name} in ${PROJECT_NAME}.")
 
 endfunction()
@@ -79,3 +94,8 @@ set_target_properties(pybind11_trintrin PROPERTIES
 # `-- bindings.<cpython_extension>
 
 install(TARGETS pybind11_trintrin DESTINATION ${PYTHON_INSTDIR})
+
+# Add tests for the bindings
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

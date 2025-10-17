@@ -13,6 +13,6 @@ PYBIND11_MODULE(bindings, m)
 
     m.doc() = "trintrin bindings";
 
-    py::module msgModule = m.def_submodule("msg");
+    py::module msgModule = m.def_submodule("msgs");
     trintrin::bindings::msgs::CreateModule(msgModule);
 }

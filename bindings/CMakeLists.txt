@@ -48,7 +48,8 @@ if(TRINTRIN_COMPILE_PYTHON_BINDINGS)
     add_subdirectory(python)
 
     # Create the __init__.py file
-    file(WRITE ${TRINTRIN_PYTHON_PACKAGE}/__init__.py "")
+    set(PYTHON_INIT_NAME ${TRINTRIN_PYTHON_PACKAGE}/init_install.py)
+    file(WRITE ${PYTHON_INIT_NAME} "")
 
     # If we are on Windows and BUILD_SHARED_LIBS is ON, handle the fact that
     # the Python interpreter does not look into PATH to find dll (see https://docs.python.org/3.8/library/os.html#os.add_dll_directory)
@@ -59,26 +60,27 @@ if(TRINTRIN_COMPILE_PYTHON_BINDINGS)
             set(PYTHON_FULL_INSTDIR "${CMAKE_INSTALL_PREFIX}/${PYTHON_INSTDIR}")
         endif()
         file(RELATIVE_PATH RELATIVE_PATH_BETWEEN_INIT_PY_AND_DLL_DIRECTORY ${PYTHON_FULL_INSTDIR} ${CMAKE_INSTALL_FULL_BINDIR})
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "import os${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "library_dll_path = os.path.join(os.path.dirname(__file__),'${RELATIVE_PATH_BETWEEN_INIT_PY_AND_DLL_DIRECTORY}')${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "# Avoid to call add_dll_directory if not necessary,${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "# for example if the library to find are already found in the proper location in a conda environment${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "if(library_dll_path != os.path.join(os.environ.get('CONDA_PREFIX', ''),'Library','bin') and library_dll_path != os.path.join(os.environ.get('CONDA_PREFIX', ''),'bin')):${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "    if(os.path.exists(library_dll_path)):${NEW_LINE}")
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "        os.add_dll_directory(library_dll_path)${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "import os${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "library_dll_path = os.path.join(os.path.dirname(__file__),'${RELATIVE_PATH_BETWEEN_INIT_PY_AND_DLL_DIRECTORY}')${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "# Avoid to call add_dll_directory if not necessary,${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "# for example if the library to find are already found in the proper location in a conda environment${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "if(library_dll_path != os.path.join(os.environ.get('CONDA_PREFIX', ''),'Library','bin') and library_dll_path != os.path.join(os.environ.get('CONDA_PREFIX', ''),'bin')):${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "    if(os.path.exists(library_dll_path)):${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "        os.add_dll_directory(library_dll_path)${NEW_LINE}")
 
         # For running tests, we need to add also the path where the dependecies are installed.
         # We add yarp to update the dll path for the tests.
-        file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "import yarp${NEW_LINE}")
+        file(APPEND ${PYTHON_INIT_NAME} "import yarp${NEW_LINE}")
 
 
     endif()
 
-    file(APPEND "${TRINTRIN_PYTHON_PACKAGE}/__init__.py" "from .bindings import *${NEW_LINE}")
+    file(APPEND ${PYTHON_INIT_NAME} "from .bindings import *${NEW_LINE}")
 
     # Install the __init__.py file
-    install(FILES "${TRINTRIN_PYTHON_PACKAGE}/__init__.py"
-            DESTINATION ${PYTHON_INSTDIR})
+    install(FILES ${PYTHON_INIT_NAME}
+            DESTINATION ${PYTHON_INSTDIR}
+            RENAME __init__.py)
 
     # Install pip metadata files to ensure that trintrin installed via CMake is listed by pip list
     # See https://packaging.python.org/specifications/recording-installed-packages/

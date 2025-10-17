@@ -31,4 +31,5 @@ add_trintrin_python_module(
     NAME MsgsBindings
     SOURCES ${TRINTRIN_BINDINGS_MSGS_SRC}
     HEADERS ${TRINTRIN_BINDINGS_MSGS_HDR}
-    LINK_LIBRARIES trintrin::msgs YARP::YARP_os)
+    LINK_LIBRARIES trintrin::msgs YARP::YARP_os
+    TESTS tests/test_load.py)
