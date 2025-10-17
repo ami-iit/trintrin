@@ -29,21 +29,21 @@ trintrin_add_idl(trintrin/msgs/WearableData.thrift)
 trintrin_add_idl(trintrin/msgs/WearableTargets.thrift)
 
 
-add_library(trintrin_msgs
+add_library(msgs
             ${MSG_HEADERS}
             ${MSG_SOURCES})
 
-add_library(trintrin::msgs ALIAS trintrin_msgs)
-target_link_libraries(trintrin_msgs YARP::YARP_os)
-set_target_properties(trintrin_msgs PROPERTIES
+add_library(trintrin::msgs ALIAS msgs)
+target_link_libraries(msgs YARP::YARP_os)
+set_target_properties(msgs PROPERTIES
                       PUBLIC_HEADER "${MSG_HEADERS}")
 foreach(dir ${MSG_INCLUDE_DIRS})
-    target_include_directories(trintrin_msgs PUBLIC $<BUILD_INTERFACE:${dir}>)
+    target_include_directories(msgs PUBLIC $<BUILD_INTERFACE:${dir}>)
 endforeach()
-target_include_directories(trintrin_msgs PUBLIC
+target_include_directories(msgs PUBLIC
                            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/trintrin/msgs>)
 
-install(TARGETS trintrin_msgs
+install(TARGETS msgs
         EXPORT trintrin
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
