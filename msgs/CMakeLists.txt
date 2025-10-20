@@ -41,7 +41,7 @@ foreach(dir ${MSG_INCLUDE_DIRS})
     target_include_directories(msgs PUBLIC $<BUILD_INTERFACE:${dir}>)
 endforeach()
 target_include_directories(msgs PUBLIC
-                           $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/trintrin/msgs>)
+                           "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 install(TARGETS msgs
         EXPORT trintrin
