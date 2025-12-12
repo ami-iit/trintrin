@@ -28,7 +28,7 @@ set(TRINTRIN_BINDINGS_MSGS_HDR
 )
 
 add_trintrin_python_module(
-    NAME MsgsBindings
+    NAME TrintrinMsgsBindings
     SOURCES ${TRINTRIN_BINDINGS_MSGS_SRC}
     HEADERS ${TRINTRIN_BINDINGS_MSGS_HDR}
     LINK_LIBRARIES trintrin::msgs YARP::YARP_os

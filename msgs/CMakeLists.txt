@@ -37,6 +37,7 @@ add_library(trintrin::msgs ALIAS msgs)
 target_link_libraries(msgs YARP::YARP_os)
 set_target_properties(msgs PROPERTIES
                       PUBLIC_HEADER "${MSG_HEADERS}")
+set_target_properties(msgs PROPERTIES OUTPUT_NAME trintrin_msgs)
 foreach(dir ${MSG_INCLUDE_DIRS})
     target_include_directories(msgs PUBLIC $<BUILD_INTERFACE:${dir}>)
 endforeach()
