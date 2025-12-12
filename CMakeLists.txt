@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(trintrin
         LANGUAGES CXX
-        VERSION 0.0.1)
+        VERSION 0.0.2)
 
 # =====================
 # PROJECT CONFIGURATION
